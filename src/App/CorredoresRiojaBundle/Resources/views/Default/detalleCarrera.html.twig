@@ -1,0 +1,8 @@
+<h3><a href="{{ path('carrera', {'slug': carrera.getslug}) }}"> {{ carrera.nombre }} </a></h3>
+<div>
+    <img src="{{ asset('bundles/appcorredoresrioja/images/'~carrera.imagen~'') }} " />
+    <p>{{ carrera.descripcion }}</p>
+    Organizador: {{ carrera.organizador }}<br/>
+    Distancia: {{ carrera.distancia }} kms<br/>
+    Fecha de celebración: {{ carrera.fechaCelebracion | date('d/m/Y  H:i') }}
+</div>

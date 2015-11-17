@@ -1,0 +1,76 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin: { password: admin, roles: 'ROLE_ADMIN' }
+
+        corredores:
+            id: corredores_user_provider
+        organizaciones:
+            id: organizaciones_user_provider
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        organizacion:
+            pattern:  ^/(es|en)/organizacion
+            provider: organizaciones
+            anonymous: ~
+            http_basic: ~
+            logout:
+                path: organizacion_logout
+                target: organizacion_login
+            form_login:
+                login_path: organizacion_login
+                check_path: organizacion_login_check  
+                default_target_path: organizaciones_admin
+        default:
+            pattern:  ^/
+            provider: corredores
+            anonymous: ~
+            http_basic: ~
+            logout:
+                path: usuario_logout
+                target: usuario_login
+            form_login:
+                login_path: usuario_login
+                check_path: usuario_login_check  
+                default_target_path: portada
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        App\CorredoresRiojaDomain\Model\Corredor:
+            algorithm: bcrypt
+            cost: 12
+        App\CorredoresRiojaBundle\Security\CorredorUser:
+            algorithm: bcrypt
+            cost: 12
+        App\CorredoresRiojaDomain\Model\Organizacion:
+            algorithm: bcrypt
+            cost: 12
+        App\CorredoresRiojaBundle\Security\OrganizacionUser:
+            algorithm: bcrypt
+            cost: 12
+    access_control:
+        - { path: ^/corredores/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(es|en)/organizacion/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(es|en)/organizacion/admin, roles: ROLE_ORGANIZACION }
+        - { path: ^/(es|en)/corredores/inscribir, roles: ROLE_CORREDOR }
+        - { path: ^/(es|en)/corredores/desapuntar, roles: ROLE_CORREDOR }
+        - { path: ^/(es|en)/corredores/admin, roles: ROLE_CORREDOR }

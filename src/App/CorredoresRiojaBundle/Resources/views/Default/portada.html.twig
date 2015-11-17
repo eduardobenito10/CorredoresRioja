@@ -1,0 +1,19 @@
+{#Extendemos la plantilla base#}
+{% extends 'AppCorredoresRiojaBundle:Default:zonacorredores.html.twig'%}
+
+{#Definimos los bloques#}
+{#El bloque del título#}
+{% block content %}
+    {%for mensaje in app.session.flashbag.get('info')%}
+        <p class="info">{{mensaje}}</p>
+    {%endfor%}
+    <h2>Bienvenido a Carreras por La Rioja</h2>
+    
+    <p>Carreras por La Rioja es un sitio web donde corredores de todos los niveles pueden inscribirse en carreras organizadas en La Rioja. A continuación se muestran algunas de las carreras a las que te puedes inscribir.</p>
+    <h2>Carreras por disputar</h2>
+    
+    {% for carrera in carreras %}
+        {% include 'AppCorredoresRiojaBundle:Default:detalleCarrera.html.twig' with{'carrera': carrera} %}
+    {% endfor  %}
+    
+{% endblock %}

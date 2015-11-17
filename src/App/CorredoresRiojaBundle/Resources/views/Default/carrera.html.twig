@@ -1,0 +1,35 @@
+{#Extendemos la plantilla base#}
+{% extends 'AppCorredoresRiojaBundle:Default:zonacorredores.html.twig'%}
+
+{#Definimos los bloques#}
+{#El bloque del título#}
+{% block content %}
+    {% include 'AppCorredoresRiojaBundle:Default:detalleCarrera.html.twig' with {'carrera' : carrera} %}
+
+    {% if(carrera.disputada) %}
+
+        <h3>Ranking</h3>
+        {% set i = 1 %}
+        {% for participante in carrera.participantes %}
+            {{i}}. {{ participante.corredor.nombre }} | {{participante.tiempo|date('i:s')}} | Dorsal: {{participante.dorsal}}<br/>
+            {% set i = i+1 %}
+        {% endfor %}
+    {% else %}
+        {% if(esParticipante) %}
+            <a class="btn btn-primary" href="{{path('desapuntar', { 'slug': carrera.slug })}}">Desapuntarse</a> 
+       {% else %}
+            {% if(carrera.inscribible) %}
+                <a class="btn btn-primary" href="{{path('inscribir', { 'slug': carrera.slug })}}">Inscribirse</a>
+            {% else %}
+                <span>Los sentimos, ya no te puedes apuntar a la carrera.</span>
+            {% endif %}
+        {% endif %}
+
+        <h3>Inscritos</h3>
+        {% for participante in carrera.participantes %}
+            {{ participante.corredor.nombre}} <br/>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

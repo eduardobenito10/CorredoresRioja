@@ -1,0 +1,26 @@
+{#Extendemos la plantilla base#}
+{% extends 'AppCorredoresRiojaBundle:Default:zonacorredores.html.twig'%}
+
+{#Definimos los bloques#}
+{#El bloque del título#}
+{% block content %}
+    {%for mensaje in app.session.flashbag.get('info')%}
+        <p class="info">{{mensaje}}</p>
+    {%endfor%}
+    
+    <h2>Carreras</h2>
+    
+    {% if corredor is defined %}
+    Hola {{corredor.nombre}}, a continuación se muestran las carreras en las que estás inscrito y las carreras que has disputado.
+    {% endif %}
+    
+    <h3>Carreras por disputar</h3>
+    {% for carrera in carreras %}
+        {% include 'AppCorredoresRiojaBundle:Default:detalleCarrera.html.twig' with{'carrera': carrera} %}
+    {% endfor  %}
+    
+    <h3>Carreras disputadas</h3>
+    {% for carrera in carrerasDisputadas %}
+        {% include 'AppCorredoresRiojaBundle:Default:detalleCarrera.html.twig' with{'carrera': carrera} %}
+    {% endfor  %}
+{% endblock %}

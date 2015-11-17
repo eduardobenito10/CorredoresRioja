@@ -1,0 +1,33 @@
+portada:
+    locales:  { en: /homepage, es: /portada }
+    defaults: { _controller: AppCorredoresRiojaBundle:Default:index }
+    
+corredores:
+    resource: "@AppCorredoresRiojaBundle/Resources/config/routing.yml"
+    prefix: /corredores
+    
+carreras:
+    locales:  { en: /corredores/races, es: /corredores/carreras }
+    defaults: { _controller: AppCorredoresRiojaBundle:Carrera:carreras }
+    
+organizaciones:
+    path:     /organizaciones
+    defaults: { _controller: AppCorredoresRiojaBundle:Organizacion:organizaciones }
+
+organizacion_detalle:
+    path:     /organizacion/detalle/{slug}
+    defaults: { _controller: AppCorredoresRiojaBundle:Organizacion:showOrganizacion }
+
+organizaciones_admin:
+    path:     /organizaciones/admin
+    defaults: { _controller: AppCorredoresRiojaBundle:Organizacion:organizaciones }
+
+organizacion_login:
+    path:     /organizaciones/login
+    defaults: { _controller: AppCorredoresRiojaBundle:Security:organizacionLogin }
+
+organizacion_login_check:
+    path: /organizacion/login_check
+    
+organizacion_logout:
+    path: /organizacion/logout

@@ -1,0 +1,40 @@
+index:
+    path:     /
+    defaults: { _controller: AppCorredoresRiojaBundle:Default:index }
+admin:
+    path:     /admin/
+    defaults: { _controller: AppCorredoresRiojaBundle:Carrera:admin }
+    
+carrera:
+    path:     /carrera/{slug}
+    defaults: { _controller: AppCorredoresRiojaBundle:Carrera:carrera }
+    
+inscribir:
+    path:     /inscribir/{slug}
+    defaults: { _controller: AppCorredoresRiojaBundle:Carrera:inscribir }
+    
+desapuntar:
+    path:     /desapuntar/{slug}
+    defaults: { _controller: AppCorredoresRiojaBundle:Carrera:desapuntar }
+    
+miscarreras:
+    path:     /miscarreras/
+    defaults: { _controller: AppCorredoresRiojaBundle:Carrera:miscarreras }
+    
+registro:
+    path:     /registro
+    defaults: { _controller: AppCorredoresRiojaBundle:Default:registro }
+    
+usuario_login:
+    path:     /login
+    defaults: { _controller: AppCorredoresRiojaBundle:Security:login }
+
+usuario_login_check:
+    path: /login_check
+    
+usuario_logout:
+    path: /logout
+  
+#show_organizacion:
+ #   path:     /organizacion/{slug}
+  #  defaults: { _controller: AppCorredoresRiojaBundle:Organizacion:showOrganizacion }

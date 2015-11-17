@@ -1,0 +1,19 @@
+{#Extendemos la plantilla base#}
+{% extends '::base.html.twig'%}
+
+{#Definimos los bloques#}
+{#El bloque del título#}
+{% block submenu %}
+    <nav>
+        <ul class="nav nav-pills pull-right">
+            <li><a href="{{path('portada')}}">Portada</a></li>
+            <li><a href="{{path('carreras')}}">Carreras</a></li>
+            <li><a href="{{path('miscarreras')}}">Mis carreras</a></li>
+            {% if is_granted('ROLE_CORREDOR') %}
+            <li><a href="{{path('usuario_logout')}}">{{app.security.getToken().getUser().getUsername()}} (Logout)</a></li>
+            {% else %}
+            <li><a href="{{path('usuario_login')}}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

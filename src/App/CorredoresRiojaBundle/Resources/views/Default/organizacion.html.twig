@@ -1,0 +1,8 @@
+{#Extendemos la plantilla base#}
+{% extends 'AppCorredoresRiojaBundle:Default:zonaorganizaciones.html.twig'%}
+
+{#Definimos los bloques#}
+{#El bloque del título#}
+{% block content %}
+    Nombre: {{organizacion.nombre}}
+{% endblock %}
